@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Alarm System</string>
+    <string name="no_cardetails">Click on the button below to Add An Alarm!</string>
+    <string name="hint_text">Alarm Name</string>
 </resources>
