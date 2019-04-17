@@ -1,13 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/design_default_color_primary"
     android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="148dp"
+        android:orientation="vertical"
+        android:id="@+id/lay1">
     <TimePicker
         android:id="@+id/timePicker"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:timePickerMode="spinner"></TimePicker>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/lay2"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lay1">
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:id="@+id/reminder_title"
+        android:layout_marginLeft="40dp"
+        android:hint="@string/hint_text"
+        android:textSize="25dp"
+        android:lines="4"
+        android:minLines="4"
+        android:gravity="top|left"
+        android:textColor="@android:color/holo_blue_bright"
+        android:scrollHorizontally="false"
+        android:textColorHint="@color/primary_text_disabled_material_dark"
+        android:inputType="textCapWords|textMultiLine"
+        android:layout_marginRight="20dp"
+        android:layout_height="60dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/lay3"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lay2">
+    <Spinner
+        android:id="@+id/tone"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="60dp"></Spinner>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lay3">
+    <Button
+        android:id="@+id/savebtn"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:layout_marginTop="120dp"
+        android:text="Save" />
+    </LinearLayout>
+
 
 </RelativeLayout>
