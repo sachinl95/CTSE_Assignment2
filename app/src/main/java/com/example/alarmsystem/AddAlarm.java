@@ -1,5 +1,9 @@
 package com.example.alarmsystem;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -13,6 +17,9 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+
 public class AddAlarm extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     TimePicker timePicker;
@@ -24,6 +31,9 @@ public class AddAlarm extends AppCompatActivity implements AdapterView.OnItemSel
     String alarmName;
     String alarmTime;
     int alarmToneSelected;
+    int alarmTimeHours;
+    int alarmTimeMinute;
+    private PendingIntent alarmIntent;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,12 +50,13 @@ public class AddAlarm extends AppCompatActivity implements AdapterView.OnItemSel
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
         mDataBaseHelper = new DataBaseHelper(this);
-        mDataBaseHelper.addAlarm("Alarm1","08:00",2);
 
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
                 alarmTime = Integer.toString(hourOfDay)+":"+Integer.toString(minute);
+                alarmTimeHours = hourOfDay;
+                alarmTimeMinute = minute;
             }
         });
     }
@@ -79,10 +90,30 @@ public class AddAlarm extends AppCompatActivity implements AdapterView.OnItemSel
     }
     public void saveAlarm(View view) {
         alarmName = alarmNameText.getText().toString();
+        try {
+            alarmTone.stop();
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
 
         if (alarmName != null && alarmTime != null && alarmToneSelected > 0) {
             boolean insertData = mDataBaseHelper.addAlarm(alarmName, alarmTime, alarmToneSelected);
             if(insertData){
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                Intent intent = new Intent(this,MyBroadCastReciever.class);
+                alarmIntent = PendingIntent.getBroadcast(this,0,intent,0);
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.set(Calendar.HOUR_OF_DAY,alarmTimeHours);
+                calendar.set(Calendar.MINUTE,alarmTimeMinute);
+
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),1000*60*20,alarmIntent);
+
+
+
+
                 toastMessage("Added Successfully");
             }
             else {

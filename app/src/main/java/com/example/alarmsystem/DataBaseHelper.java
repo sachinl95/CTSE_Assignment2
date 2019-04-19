@@ -2,6 +2,7 @@ package com.example.alarmsystem;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -62,5 +63,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return  false;
 
+    }
+    public Cursor fetch()
+    {
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * from alarm_table",null);
+        return  cursor;
     }
 }
