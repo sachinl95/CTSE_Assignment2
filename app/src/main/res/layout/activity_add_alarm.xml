@@ -21,7 +21,7 @@
         android:layout_below="@id/lay1">
     <EditText
         android:layout_width="match_parent"
-        android:id="@+id/reminder_title"
+        android:id="@+id/alarm_name_txt"
         android:layout_marginLeft="40dp"
         android:hint="@string/hint_text"
         android:textSize="25dp"
@@ -63,7 +63,8 @@
         android:layout_marginLeft="150dp"
         android:textColor="@color/design_default_color_primary_dark"
         android:layout_marginTop="120dp"
-        android:text="Save" />
+        android:text="Save"
+        android:onClick="saveAlarm"/>
     </LinearLayout>
 
 
