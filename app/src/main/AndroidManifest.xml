@@ -25,6 +25,10 @@
                 android:value=".MainActivity"
                 />
         </activity>
+        <activity android:name=".AlarmRinging"
+            android:label="Alarm Ringing"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme"></activity>
         <receiver android:name=".MyBroadCastReciever"
             android:enabled="true"
             android:exported="true"/>

@@ -12,6 +12,10 @@ public class MyBroadCastReciever extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         mp= MediaPlayer.create(context,R.raw.alarm_ringtones);
         mp.start();
-        Toast.makeText(context, "Alarm....", Toast.LENGTH_LONG).show();
+
+        Intent alarmRingingIntent = new Intent(context, AlarmRinging.class);
+        alarmRingingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(alarmRingingIntent);
+//        Toast.makeText(context, "Alarm....", Toast.LENGTH_LONG).show();
     }
 }

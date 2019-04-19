@@ -115,6 +115,7 @@ public class AddAlarm extends AppCompatActivity implements AdapterView.OnItemSel
 
 
                 toastMessage("Added Successfully");
+                finish();
             }
             else {
                 toastMessage("Error in Adding Alarm");
